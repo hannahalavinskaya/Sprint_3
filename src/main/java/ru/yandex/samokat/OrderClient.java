@@ -9,7 +9,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 public class OrderClient extends RestAssuredClient{
     private static final String ORDER_PATH = "/api/v1/orders/";
 
-    @Step()
+    @Step("Create an order")
     public ValidatableResponse create(Order order){
         return given()
                 .log().all()
@@ -20,7 +20,7 @@ public class OrderClient extends RestAssuredClient{
                 .then();
     }
 
-    @Step()
+    @Step("Deleting an order")
     public boolean delete(int orderId) {
         return given()
                 .log().all()
@@ -35,7 +35,7 @@ public class OrderClient extends RestAssuredClient{
                 .path("ok");
     }
 
-    @Step()
+    @Step("Getting a list of orders")
     public ValidatableResponse getList(){
         return given()
                 .log().all()

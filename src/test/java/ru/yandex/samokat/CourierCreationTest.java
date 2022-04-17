@@ -48,7 +48,7 @@ public class CourierCreationTest {
                 .assertThat()
                 .statusCode(SC_OK)
                 .extract()
-                .path("id");; //если он создан, пробуем залогиниться под этим клиентом и из этого запроса берём Id
+                .path("id"); //если он создан, пробуем залогиниться под этим клиентом и из этого запроса берём Id
     }
 
     @Test
@@ -60,11 +60,10 @@ public class CourierCreationTest {
 
         courierId = courierClient.login(CourierCredentials.getCourierCredentials(courier1))
                 .extract()
-                .path("id");; //если он создан, пробуем залогиниться под этим клиентом и из этого запроса берём Id
+                .path("id"); //если он создан, пробуем залогиниться под этим клиентом и из этого запроса берём Id
 
         courierClient.create(courier1).assertThat()
-                .statusCode(SC_CONFLICT);//проверка, что не создался такой же курьер
-
+                .statusCode(SC_CONFLICT); //проверка, что не создался такой же курьер
     }
 
     @Test
@@ -76,14 +75,13 @@ public class CourierCreationTest {
 
         courierId = courierClient.login(CourierCredentials.getCourierCredentials(courier1))
                 .extract()
-                .path("id");; //если он создан, пробуем залогиниться этим клиентом, и из этого запроса берём Id
+                .path("id"); //если он создан, пробуем залогиниться этим клиентом, и из этого запроса берём Id
 
         String message = courierClient.create(courier2).assertThat()
                 .statusCode(SC_CONFLICT)
                 .extract()
                 .path("message");//проверка корректности выполнения запроса, что клиент не создан
-        assertEquals("Courier is created.", message, "Этот логин уже используется. Попробуйте другой.");
-
+        assertEquals("Этот логин уже используется. Попробуйте другой.", message);
     }
 
     @Test
@@ -95,6 +93,6 @@ public class CourierCreationTest {
                 .statusCode(SC_BAD_REQUEST)
                 .extract()
                 .path("message");//проверка корректности выполнения запроса, что клиент не создан
-        assertEquals("Courier is created.", message, "Недостаточно данных для создания учетной записи");
+        assertEquals("Недостаточно данных для создания учетной записи", message);
     }
 }

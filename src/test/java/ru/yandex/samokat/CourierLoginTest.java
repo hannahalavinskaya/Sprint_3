@@ -7,9 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.apache.http.HttpStatus.*;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.*;
 
 public class CourierLoginTest {
@@ -42,7 +39,7 @@ public class CourierLoginTest {
                 .statusCode(SC_OK)
                 .extract()
                 .path("id"); // пробуем залогиниться под этим клиентом и из этого запроса берём Id
-        assertThat("Courier ID is incorrect.", courierId, is(not(0)));
+        assertNotEquals("Courier ID is incorrect.", courierId,0);
     }
 
     @Test
@@ -54,7 +51,7 @@ public class CourierLoginTest {
                 .statusCode(SC_NOT_FOUND)
                 .extract()
                 .path("message");
-        assertEquals("Courier is logged.", message, "Учетная запись не найдена");
+        assertEquals("Учетная запись не найдена", message);
     }
 
     @Test
@@ -66,7 +63,7 @@ public class CourierLoginTest {
                 .statusCode(SC_BAD_REQUEST)
                 .extract()
                 .path("message");
-        assertEquals("Courier is logged.", message, "Недостаточно данных для входа");
+        assertEquals("Недостаточно данных для входа", message);
     }
 
     @Test
@@ -78,6 +75,6 @@ public class CourierLoginTest {
                 .statusCode(SC_NOT_FOUND)
                 .extract()
                 .path("message");
-        assertEquals("Courier is logged.", message, "Учетная запись не найдена");
+        assertEquals("Учетная запись не найдена", message);
     }
 }

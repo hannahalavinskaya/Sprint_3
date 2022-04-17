@@ -9,7 +9,7 @@ public class CourierClient extends RestAssuredClient{
 
     private static final String COURIER_PATH = "/api/v1/courier/";
 
-    @Step()
+    @Step("Creating a courier")
     public ValidatableResponse create(Courier courier){
         return given()
                 .log().all()
@@ -20,7 +20,7 @@ public class CourierClient extends RestAssuredClient{
                 .then();
     }
 
-    @Step()
+    @Step("Courier login")
     public ValidatableResponse login(CourierCredentials courierCredentials){
         return given()
                 .log().all()
@@ -31,7 +31,7 @@ public class CourierClient extends RestAssuredClient{
                 .then();
     }
 
-    @Step()
+    @Step("Deleting a courier")
     public boolean delete(int courierId){
         return given()
                 .log().all()
